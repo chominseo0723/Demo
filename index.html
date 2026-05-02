@@ -195,22 +195,18 @@
             margin-bottom: 40px;
         }
 
-        .hero-image-placeholder {
+        .hero-image {
             width: 100%;
             max-width: 700px;
             height: 400px;
             margin: 50px auto 0;
             background-color: var(--white);
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            font-size: 1.2rem;
-            color: var(--beige-dark);
-            border: 2px dashed var(--beige-dark);
             animation: float 6s ease-in-out infinite;
             /* 둥둥 떠다니는 애니메이션 */
+            object-fit: cover;
+            display: block;
         }
 
         @keyframes float {
@@ -475,7 +471,7 @@
                 font-size: 1rem;
             }
 
-            .hero-image-placeholder {
+            .hero-image {
                 height: 250px;
             }
 
@@ -511,9 +507,7 @@
             <p>쫀득한 떡과 고소한 버터의 조합, 특별한 디저트를 만나보세요.</p>
             <a href="#order" class="btn">주문하러 가기</a>
 
-            <div class="hero-image-placeholder">
-                [ 먹음직스러운 버터떡 이미지 영역 ]
-            </div>
+            <img src="./assets/buttertteok.png" alt="버터떡 이미지" class="hero-image">
         </div>
     </section>
 
