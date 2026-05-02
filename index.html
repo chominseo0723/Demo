@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttertteok - 한 입 먹으면 반하는 버터떡</title>
+    <!-- 구글 폰트: 감성적인 고운 돋움 & 깔끔한 Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================
+           1. 변수 설정 (브랜드 컬러)
+        ============================ */
+        :root {
+            --bg-cream: #FFFdf7;
+            /* 따뜻한 크림 배경 */
+            --butter-main: #FDE047;
+            /* 메인 버터색 */
+            --butter-hover: #FACC15;
+            /* 호버시 진한 버터색 */
+            --beige-light: #FEF3C7;
+            /* 연한 베이지 */
+            --beige-dark: #D4D4D8;
+            /* 라인/보더 베이지 */
+            --text-dark: #3F3F46;
+            /* 텍스트 짙은 회색 */
+            --text-light: #71717A;
+            /* 텍스트 옅은 회색 */
+            --brand-color: #d97706;
+            /* 포인트 오렌지-브라운 */
+            --white: #FFFFFF;
+        }
+
+        /* ============================
+           2. 기본 초기화 및 공통 스타일
+        ============================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* 네비게이션 클릭 시 부드러운 스크롤 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* 제목류에는 감성적인 폰트 적용 */
+        h1,
+        h2,
+        h3,
+        .brand {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 공통 레이아웃 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            /* 섹션 간 여백 */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+        }
+
+        /* 공통 버튼 스타일 */
+        .btn {
+            display: inline-block;
+            background-color: var(--butter-main);
+            color: var(--text-dark);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn:hover {
+            background-color: var(--butter-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(253, 224, 71, 0.4);
+        }
+
+        /* ============================
+           3. 헤더 (Header)
+        ============================ */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 253, 247, 0.95);
+            /* 반투명 배경 */
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--brand-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--brand-color);
+        }
+
+        /* 메뉴 호버 밑줄 애니메이션 */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--brand-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================
+           4. 히어로 섹션 (Hero)
+        ============================ */
+        #hero {
+            padding-top: 160px;
+            padding-bottom: 120px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--beige-light) 0%, var(--bg-cream) 100%);
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            color: var(--brand-color);
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+            margin: 50px auto 0;
+            background-color: var(--white);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            font-size: 1.2rem;
+            color: var(--beige-dark);
+            border: 2px dashed var(--beige-dark);
+            animation: float 6s ease-in-out infinite;
+            /* 둥둥 떠다니는 애니메이션 */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* ============================
+           5. 상품 소개 (Features)
+        ============================ */
+        #features {
+            background-color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .feature-card {
+            padding: 50px 30px;
+            background-color: var(--bg-cream);
+            border-radius: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--brand-color);
+        }
+
+        /* ============================
+           6. 메뉴 섹션 (Menu)
+        ============================ */
+        #menu {
+            background-color: var(--bg-cream);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 250px;
+            background-color: var(--beige-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .menu-info {
+            padding: 30px 20px 10px;
+        }
+
+        .menu-name {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .menu-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            min-height: 48px;
+            /* 줄맞춤 */
+        }
+
+        .menu-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--brand-color);
+            margin-bottom: 25px;
+        }
+
+        /* ============================
+           7. 리뷰 섹션 (Reviews)
+        ============================ */
+        #reviews {
+            background-color: var(--beige-light);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: #F59E0B;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .review-author {
+            font-weight: 700;
+            text-align: right;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* ============================
+           8. 주문하기 섹션 (Order)
+        ============================ */
+        #order {
+            background-color: var(--white);
+        }
+
+        .order-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .order-form {
+            background-color: var(--bg-cream);
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--beige-dark);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: var(--white);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            font-size: 1.15rem;
+            padding: 16px;
+            margin-top: 15px;
+            border-radius: 12px;
+        }
+
+        /* ============================
+           9. 푸터 (Footer)
+        ============================ */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #A1A1AA;
+        }
+
+        /* ============================
+           10. 반응형 모바일 처리
+        ============================ */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            #hero {
+                padding-top: 140px;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .hero-image-placeholder {
+                height: 250px;
+            }
+
+            .order-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. 헤더 섹션 -->
+    <header>
+        <div class="container">
+            <div class="brand">Buttertteok</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">소개</a></li>
+                    <li><a href="#features">상품특징</a></li>
+                    <li><a href="#menu">메뉴</a></li>
+                    <li><a href="#reviews">리뷰</a></li>
+                    <li><a href="#order">주문하기</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2. 메인 히어로 섹션 -->
+    <section id="hero">
+        <div class="container">
+            <h1>한 입 먹으면 반하는 버터떡</h1>
+            <p>쫀득한 떡과 고소한 버터의 조합, 특별한 디저트를 만나보세요.</p>
+            <a href="#order" class="btn">주문하러 가기</a>
+
+            <div class="hero-image-placeholder">
+                [ 먹음직스러운 버터떡 이미지 영역 ]
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 상품 소개 (Features) 섹션 -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">왜 버터떡인가요?</h2>
+            <div class="features-grid">
+                <!-- 특징 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">쫀득한 식감</h3>
+                    <p>당일 생산된 떡의 쫄깃함이<br>입안 가득 즐거움을 줍니다.</p>
+                </div>
+                <!-- 특징 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🧈</div>
+                    <h3 class="feature-title">진한 버터 풍미</h3>
+                    <p>최상급 버터를 아낌없이 넣어<br>깊고 고소한 맛을 자랑합니다.</p>
+                </div>
+                <!-- 특징 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3 class="feature-title">선물용으로 제격</h3>
+                    <p>커피, 차와 완벽한 조화를 이루어<br>선물이나 답례품으로 좋습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 메뉴 섹션 -->
+    <section id="menu">
+        <div class="container">
+            <h2 class="section-title">베스트 메뉴</h2>
+            <div class="menu-grid">
+                <!-- 상품 1: 오리지널 -->
+                <div class="menu-card">
+                    <div class="menu-img">[ 오리지널 버터떡 사진 ]</div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">오리지널 버터떡</h3>
+                        <p class="menu-desc">클래식한 매력, 버터 본연의 풍미가 가득한 시그니처 메뉴</p>
+                        <div class="menu-price">4,500원</div>
+                        <!-- 클릭 시 하단 주문 폼의 select 값을 변경하고 스크롤 이동 -->
+                        <button class="btn" onclick="selectProduct('original')">주문 담기</button>
+                    </div>
+                </div>
+                <!-- 상품 2: 인절미 -->
+                <div class="menu-card">
+                    <div class="menu-img">[ 인절미 버터떡 사진 ]</div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">인절미 버터떡</h3>
+                        <p class="menu-desc">고소한 콩고물과 달콤한 버터의 환상적인 한국적 조합</p>
+                        <div class="menu-price">5,000원</div>
+                        <button class="btn" onclick="selectProduct('injeolmi')">주문 담기</button>
+                    </div>
+                </div>
+                <!-- 상품 3: 흑임자 -->
+                <div class="menu-card">
+                    <div class="menu-img">[ 흑임자 버터떡 사진 ]</div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">흑임자 버터떡</h3>
+                        <p class="menu-desc">할매니얼 저격! 진하고 고소한 흑임자가 듬뿍 들어간 떡</p>
+                        <div class="menu-price">5,500원</div>
+                        <button class="btn" onclick="selectProduct('blacksesame')">주문 담기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 리뷰 섹션 -->
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">고객 후기</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"떡이랑 버터가 이렇게 잘 어울릴 줄 몰랐어요! 커피랑 먹으니 그야말로 환상입니다. 재구매 의사 200%!"</p>
+                    <p class="review-author">- 김*지 님</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"답례품으로 돌렸는데 다들 너무 맛있다고 칭찬 일색이었어요. 패키지도 예뻐서 선물하기 참 좋습니다."</p>
+                    <p class="review-author">- 이*훈 님</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"흑임자 버터떡 정말 미쳤어요... 할매입맛인 제게 딱입니다. 너무 달지 않고 고소해서 부모님도 좋아하세요."</p>
+                    <p class="review-author">- 박*연 님</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 주문하기 (문의 폼) 섹션 -->
+    <section id="order">
+        <div class="container order-container">
+            <h2 class="section-title">주문 문의</h2>
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" required placeholder="홍길동">
+                </div>
+                <div class="form-group">
+                    <label for="contact">연락처</label>
+                    <input type="tel" id="contact" required placeholder="010-0000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="product">주문상품 선택</label>
+                    <select id="product" required>
+                        <option value="" disabled selected>상품을 선택해주세요</option>
+                        <option value="original">오리지널 버터떡 (4,500원)</option>
+                        <option value="injeolmi">인절미 버터떡 (5,000원)</option>
+                        <option value="blacksesame">흑임자 버터떡 (5,500원)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">요청사항</label>
+                    <textarea id="message" rows="4" placeholder="수량, 배송 메세지 등 기타 요청사항을 적어주세요."></textarea>
+                </div>
+                <button type="submit" class="btn submit-btn">주문 문의하기</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 7. 푸터 섹션 -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Buttertteok. All rights reserved.</p>
+            <p class="social-links">
+                Instagram: @buttertteok_official &nbsp;|&nbsp; Kakao: 버터떡채널
+            </p>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 기능 구현 -->
+    <script>
+        // 메뉴 카드에서 '주문 담기' 클릭 시 동작하는 함수
+        function selectProduct(productValue) {
+            // 1. 주문 폼의 select 옵션 변경
+            const selectElement = document.getElementById('product');
+            selectElement.value = productValue;
+
+            // 2. 주문 섹션으로 부드럽게 스크롤
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 폼 제출(Submit) 이벤트 처리
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // 기본 폼 전송(새로고침) 방지
+
+            // 입력된 이름과 선택된 상품명 가져오기
+            const name = document.getElementById('name').value;
+            const selectElement = document.getElementById('product');
+            const productName = selectElement.options[selectElement.selectedIndex].text;
+
+            // 알림창(Alert) 띄우기
+            alert(`🎉 ${name}님의 [${productName}] 주문 문의가 성공적으로 접수되었습니다!\n빠른 시일 내에 기재해주신 연락처로 안내해 드리겠습니다.`);
+
+            // 폼 필드 초기화
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
